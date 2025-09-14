@@ -38,7 +38,7 @@ function renderChamados() {
             <small class="text-muted">ID: ${chamado.id}</small>
         </div>
         <p class="mb-1">${chamado.descricao}</p>
-        <small class="status-group" >Status: <div class="btn-status"> ${statusCapitalizado} </div> </small>
+        <small class="status-group" >Status: <div class="btn-status ${statusCapitalizado}"> ${statusCapitalizado} </div> </small>
     `;
             // Adiciona clique para redirecionar para a tela de alteração de status
             item.addEventListener("click", () => {

@@ -1,76 +1,43 @@
 :root {
-    --accent: #556ee6;
-    --muted: #6c757d;
-    --topbar-nav-link: #6d6b70;
-    --topbar-nav-link-active-bg: #000000;
-    --topbar-nav-link-active-color: #fff;
-    --topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
-    --card-chat-shadow: rgba(15, 23, 42, 0.06);
-    --messages-bg-gradient-1: #f7f8fb;
-    --messages-bg-gradient-2: #eef3ff;
-    --messages-bg-gradient-3: #ffffff;
-    --messages-bg-gradient-4: #fbfdff;
-    --msg-user-gradient-1: #6a7dff;
-    --msg-user-gradient-2: #556ee6;
-    --ticket-pending-bg: #fff4e5;
-    --ticket-pending-color: #7a5a00;
-    --ticket-closed-bg: #dfeee6;
-    --ticket-closed-color: #0f5132;
-    --no-data: #6c757d;
-    --body-bg-gradient-1: #f9fafe;
-    --body-bg-gradient-2: #e0f0ff;
-    --body-bg-gradient-3: #e6e0ff;
-    --body-bg-gradient-4: #ffe6f0;
-    --topbar-bg: rgba(255, 255, 255, 0.55);
-    --topbar-border: rgba(255, 255, 255, 0.4);
-    --topbar-shadow: rgba(15, 23, 42, 0.08);
-    --btn-primary-gradient-1: #6a7dff;
-    --btn-primary-gradient-2: #556ee6;
-    --btn-primary-shadow: rgba(85, 110, 230, 0.3);
-    --btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
-    --messages-bg: rgba(255, 255, 255, 0.4);
-    --chat-footer-bg: rgba(255, 255, 255, 0.55);
-    --chat-footer-border: rgba(255, 255, 255, 0.3);
-    --msg-ai-bg: #ffffff;
-    --msg-ai-color: #1f2937;
-    --msg-ai-border: rgba(86, 103, 204, 0.06);
-    --dot-bg: #333;
-    --card-dashboard-inside-border: var(--muted);
-    --topbar-nav-link: #6d6b70;
-    --topbar-nav-link-active-bg: #000000;
-    --topbar-nav-link-active-color: #fff;
-    --topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
-    --card-chat-shadow: rgba(15, 23, 42, 0.06);
-    --messages-bg-gradient-1: #f7f8fb;
-    --messages-bg-gradient-2: #eef3ff;
-    --messages-bg-gradient-3: #ffffff;
-    --messages-bg-gradient-4: #fbfdff;
-    --msg-user-gradient-1: #6a7dff;
-    --msg-user-gradient-2: #556ee6;
-    --ticket-pending-bg: #fff4e5;
-    --ticket-pending-color: #7a5a00;
-    --ticket-closed-bg: #dfeee6;
-    --ticket-closed-color: #0f5132;
-    --no-data: #6c757d;
-    --body-bg-gradient-1: #f9fafe;
-    --body-bg-gradient-2: #e0f0ff;
-    --body-bg-gradient-3: #e6e0ff;
-    --body-bg-gradient-4: #ffe6f0;
-    --topbar-bg: rgba(255, 255, 255, 0.55);
-    --topbar-border: rgba(255, 255, 255, 0.4);
-    --topbar-shadow: rgba(15, 23, 42, 0.08);
-    --btn-primary-gradient-1: #6a7dff;
-    --btn-primary-gradient-2: #556ee6;
-    --btn-primary-shadow: rgba(85, 110, 230, 0.3);
-    --btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
-    --messages-bg: rgba(255, 255, 255, 0.4);
-    --chat-footer-bg: rgba(255, 255, 255, 0.55);
-    --chat-footer-border: rgba(255, 255, 255, 0.3);
-    --msg-ai-bg: #ffffff;
-    --msg-ai-color: #1f2937;
-    --msg-ai-border: rgba(86, 103, 204, 0.06);
-    --dot-bg: #333;
-    --card-dashboard-inside-border: var(--muted);
+--accent: #556ee6;
+--muted: #6c757d;
+--topbar-nav-link: #6d6b70;
+--topbar-nav-link-active-bg: #000000;
+--topbar-nav-link-active-color: #fff;
+--topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
+--card-chat-shadow: rgba(15, 23, 42, 0.06);
+--messages-bg-gradient-1: #f7f8fb;
+--messages-bg-gradient-2: #eef3ff;
+--messages-bg-gradient-3: #ffffff;
+--messages-bg-gradient-4: #fbfdff;
+--msg-user-gradient-1: #6a7dff;
+--msg-user-gradient-2: #556ee6;
+--ticket-open-color: #a6acff;
+--ticket-pending-bg: #fff4e5;
+--ticket-pending-color: #ffe263;
+--ticket-closed-bg: #dfeee6;
+--ticket-closed-color: #92fa56;
+--no-data: #6c757d;
+--body-bg-gradient-1: #f9fafe;
+--body-bg-gradient-2: #e0f0ff;
+--body-bg-gradient-3: #e6e0ff;
+--body-bg-gradient-4: #ffe6f0;
+--topbar-bg: rgba(255, 255, 255, 0.55);
+--topbar-border: rgba(255, 255, 255, 0.4);
+--topbar-shadow: rgba(15, 23, 42, 0.08);
+--btn-primary-gradient-1: #6a7dff;
+--btn-primary-gradient-2: #556ee6;
+--btn-primary-shadow: rgba(85, 110, 230, 0.3);
+--btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
+--messages-bg: rgba(255, 255, 255, 0.4);
+--chat-footer-bg: rgba(255, 255, 255, 0.55);
+--chat-footer-border: rgba(255, 255, 255, 0.3);
+--msg-ai-bg: #ffffff;
+--msg-ai-color: #1f2937;
+--msg-ai-border: rgba(86, 103, 204, 0.06);
+--dot-bg: #333;
+--card-dashboard-inside-border: var(--muted);
+
 }
 
 html,
@@ -212,6 +179,18 @@ body {
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 500;
+}
+
+.btn-status.andamento {
+  background-color: var(--ticket-open-color);
+}
+
+.btn-status.Fechado {
+  background-color: var(--ticket-closed-color);
+}
+
+.btn-status.Aberto {
+  background-color: var(--ticket-pending-color);
 }
 
 .ticket-pill {
