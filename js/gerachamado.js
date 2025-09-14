@@ -1,3 +1,5 @@
+import { criarTituloChamado, gerarDescricaoChamado, getInputMessage } from './script.js';
+
 // ============================
 // Inicializa array de chamados
 // ============================
@@ -15,26 +17,27 @@ window.addEventListener('DOMContentLoaded', () => {
 // ============================
 // Função para criar chamado
 // ============================
-window.criarChamado = function() {
+window.criarChamado = async function() {
+  const pergunta = getInputMessage();
+
+  const titulo = criarTituloChamado(pergunta);
+  const descricao = await gerarDescricaoChamado(pergunta);
+
   const novoChamado = {
     id: window.chamados.length + 1,
-    titulo: "Chamado automático",
-    descricao: "Chamado criado pela mensagem do bot",
+    titulo: titulo,
+    descricao: descricao,
     status: "aberto"
   };
 
   window.chamados.push(novoChamado);
-
-  // Salva no localStorage
   localStorage.setItem("chamados", JSON.stringify(window.chamados));
 
-  // Atualiza badge
   const badge = document.getElementById("badge-count");
   badge.textContent = window.chamados.length;
   badge.classList.remove("d-none");
 
   console.log("Chamado criado:", novoChamado);
-  console.log(window.chamados)
 };
 
 // ============================
@@ -48,7 +51,7 @@ if (messagesDiv) {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1 && node.classList.contains("msg") && node.classList.contains("ai")) {
           // Detecta a mensagem específica do bot
-          if (node.textContent.includes("")) {
+          if (node.textContent.includes("Não posso te ajudar no momento, desculpe. Irei abrir um chamado.")) {
             window.criarChamado();
           }
         }

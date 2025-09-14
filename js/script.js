@@ -10,6 +10,8 @@ const output = document.getElementById("messages")
 const sendBtn = document.getElementById("btn-send")
 let conversationHistory = [];
 
+let lastUserMessage = "";
+
 async function carregarContexto() {
     try {
         const response = await fetch('../contexto-IA/contextos.json');
@@ -53,6 +55,7 @@ async function sendMessage() {
 
     addMessage(text, "user");
     conversationHistory.push({ role: "user", content: text });
+    lastUserMessage = text;    
     input.value = "";
 
     // adiciona "..." animados enquanto carrega
@@ -120,3 +123,75 @@ function addLoadingMessage() {
     output.scrollTop = output.scrollHeight;
     return msg;
 }
+
+function criarTituloChamado(perguntaUsuario) {
+    if (!perguntaUsuario) return "Chamado sem título";
+
+    // Limpa espaços extras e limita o tamanho do título
+    let titulo = perguntaUsuario.trim();
+
+    // Se for muito grande, corta para 50 caracteres
+    if (titulo.length > 50) {
+        titulo = titulo.slice(0, 50) + "...";
+    }
+
+    // Remove caracteres especiais indesejados
+    titulo = titulo.replace(/[^a-zA-Z0-9áàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]/g, "");
+
+    return `Chamado: ${titulo}`;
+}
+
+async function gerarDescricaoChamado(perguntaUsuario) {
+    if (!perguntaUsuario) return "Descrição indisponível.";
+
+    // Cria o prompt para gerar a descrição
+    const prompt = `
+    Você é um assistente de IA especializado em gerar descrições detalhadas de chamados técnicos. 
+    Sua tarefa é analisar cuidadosamente a pergunta do usuário e criar uma descrição completa, clara e objetiva do pedido, mesmo que o pedido pareça simples ou trivial.
+    Utilize exclusivamente o contexto da pergunta do usuário para fundamentar sua resposta, sem inventar informações ou fazer suposições.
+    Sempre detalhe o que o usuário está solicitando, incluindo possíveis motivos, impactos e informações relevantes para o atendimento do chamado.
+    Pergunta do usuário:
+    "${perguntaUsuario}"
+`;
+
+    // Adiciona prompt à conversa temporária
+    const tempConversation = [
+        ...conversationHistory,
+        { role: "user", content: prompt }
+    ];
+
+    try {
+        const body = {
+            model: deployment,
+            messages: tempConversation,
+            max_tokens: 500
+        };
+
+        const response = await fetch(
+            `${endpoint}/openai/deployments/${deployment}/chat/completions?api-version=${apiVersion}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "api-key": apiKey
+                },
+                body: JSON.stringify(body)
+            }
+        );
+
+        const result = await response.json();
+        const descricao = result.choices?.[0]?.message?.content?.trim() || "Descrição não encontrada.";
+
+        return descricao;
+
+    } catch (error) {
+        console.error("Erro ao gerar descrição do chamado:", error);
+        return "Erro ao gerar descrição do chamado.";
+    }
+}
+
+function getInputMessage() {
+    return lastUserMessage;
+}
+
+export { criarTituloChamado, gerarDescricaoChamado, getInputMessage };
