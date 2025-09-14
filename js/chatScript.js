@@ -10,6 +10,15 @@ const apiKey = "5azYix8vQ82DP70GmSzWZDk7yh3jyMRaaZqS6gpOcJDCUvAMiQa0JQQJ99BHACYe
 const input = document.getElementById("input-message")
 const output = document.getElementById("messages")
 const sendBtn = document.getElementById("btn-send")
+const stopBtn = document.getElementById("btn-stop");
+
+stopBtn.addEventListener("click", () => {
+    stopTyping = true;
+});
+
+
+let stopTyping = false;
+
 let conversationHistory = [];
 
 let lastUserMessage = "";
@@ -24,12 +33,36 @@ async function carregarContexto() {
     }
 }
 
+async function typeMessage(text, sender) {
+    stopTyping = false; // reset para cada nova mensagem
+    const msg = document.createElement("div");
+    msg.classList.add("msg", sender);
+    output.appendChild(msg);
+    output.scrollTop = output.scrollHeight;
+
+    for (let i = 0; i < text.length; i++) {
+        if (stopTyping) break; // interrompe a digitação
+        msg.innerHTML += text[i];
+        output.scrollTop = output.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 20));
+    }
+
+    // Se parou, adiciona o restante do texto de uma vez
+    if (stopTyping && msg.innerHTML.length < text.length) {
+        msg.innerHTML += text.slice(msg.innerHTML.length);
+        output.scrollTop = output.scrollHeight;
+    }
+
+    return msg;
+}
+
 let contexto = "";
 
 (async () => {
     const ctx = await carregarContexto();
     contexto =
         "Você é um assistente de IA altamente especializado, projetado para fornecer respostas precisas, claras e confiáveis. " +
+        "Gere a resposta como se estivesse escrevendo como o Chat GPT faz. " +
         "Suas respostas devem ser baseadas exclusivamente nas informações presentes no contexto abaixo. " +
         "Se a pergunta não estiver relacionada ao contexto ou se não houver dados suficientes, informe educadamente que não pode ajudar e sugira abrir um chamado. " +
         "Nunca invente informações, nunca faça suposições, e nunca utilize conhecimento externo ao contexto fornecido. " +
@@ -94,13 +127,75 @@ async function sendMessage() {
 
         // remove "..." e troca pela resposta final
         loadingEl.remove();
-        addMessage(reply, "ai");
+        await typeMessage(reply, "ai"); // aqui a resposta vai digitando
+
         conversationHistory.push({ role: "assistant", content: reply });
+
+        // 🚨 Aqui detectamos se a IA pediu abertura de chamado
+        if (reply.includes("Irei abrir um chamado")) {
+            // cria chamado
+            const titulo = criarTituloChamado(lastUserMessage);
+            const descricao = await gerarDescricaoChamado(lastUserMessage);
+
+            // salva no localStorage
+            const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+            chamados.push({
+                id: Date.now(),
+                titulo: titulo,
+                descricao: descricao,
+                status: "aberto"
+            });
+            localStorage.setItem("chamados", JSON.stringify(chamados));
+
+            // mostra tooltip de confirmação
+            mostrarTooltipConfirmacao();
+        }
 
     } catch (error) {
         loadingEl.remove();
         addMessage("Erro: " + error, "ai");
     }
+}
+
+function mostrarTooltipConfirmacao() {
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip-confirmacao";
+    tooltip.innerText = "✅ Seu chamado foi aberto!";
+
+    document.body.appendChild(tooltip);
+
+    // centraliza no meio da tela
+    tooltip.style.position = "fixed";
+    tooltip.style.top = "50%";
+    tooltip.style.left = "50%";
+    tooltip.style.transform = "translate(-50%, -50%)";
+    tooltip.style.background = "#198754";
+    tooltip.style.color = "white";
+    tooltip.style.padding = "15px 24px";
+    tooltip.style.fontSize = "16px";
+    tooltip.style.fontWeight = "500";
+    tooltip.style.borderRadius = "10px";
+    tooltip.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+    tooltip.style.zIndex = "9999";
+    tooltip.style.opacity = "0";
+    tooltip.style.transition = "opacity 0.5s, transform 0.3s";
+
+    // animação de entrada
+    setTimeout(() => {
+        tooltip.style.opacity = "1";
+        tooltip.style.transform = "translate(-50%, -50%) scale(1.05)";
+    }, 100);
+
+    // animação de saída e redirecionamento
+    setTimeout(() => {
+        tooltip.style.opacity = "0";
+        tooltip.style.transform = "translate(-50%, -50%) scale(0.95)";
+        setTimeout(() => {
+            tooltip.remove();
+            // redireciona para a tela de chamados
+            window.location.href = "chamados.html";
+        }, 500);
+    }, 2000); // espera 3s antes de desaparecer e redirecionar
 }
 
 function addMessage(text, sender) {
@@ -123,9 +218,7 @@ function addLoadingMessage() {
     msg.classList.add("msg", "ai");
 
     msg.innerHTML = `
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+         <img src="images/loading.gif" alt="Carregando..." class="loading-icon">
     `;
 
     output.appendChild(msg);
