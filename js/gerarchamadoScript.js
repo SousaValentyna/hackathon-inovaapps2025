@@ -1,8 +1,5 @@
 import { criarTituloChamado, gerarDescricaoChamado, getInputMessage } from './chatScript.js';
 
-// ============================
-// Inicializa array de chamados
-// ============================
 window.chamados = JSON.parse(localStorage.getItem("chamados")) || [];
 
 // Atualiza badge ao carregar a página
@@ -14,9 +11,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ============================
-// Função para criar chamado
-// ============================
 window.criarChamado = async function() {
   const pergunta = getInputMessage();
 
@@ -40,9 +34,6 @@ window.criarChamado = async function() {
   console.log("Chamado criado:", novoChamado);
 };
 
-// ============================
-// Observer para detectar mensagem do bot
-// ============================
 const messagesDiv = document.getElementById("messages");
 
 if (messagesDiv) {
