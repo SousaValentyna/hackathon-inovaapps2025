@@ -48,7 +48,7 @@ if (messagesDiv) {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1 && node.classList.contains("msg") && node.classList.contains("ai")) {
           // Detecta a mensagem específica do bot
-          if (node.textContent.includes("Tente este procedimento e me diga se funcionou")) {
+          if (node.textContent.includes("")) {
             window.criarChamado();
           }
         }

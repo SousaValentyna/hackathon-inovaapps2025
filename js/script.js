@@ -1,7 +1,9 @@
+import { key } from "../secret/secret.js";
+
 const deployment = "gpt-4o-mini";
 const endpoint = "https://azure-gpt-0001.openai.azure.com";
 const apiVersion = "2025-04-01-preview";
-const apiKey = "aaaaaaaaaa"; // ⚠️ nunca expor em produção
+const apiKey = key;
 
 const input = document.getElementById("input-message")
 const output = document.getElementById("messages")
