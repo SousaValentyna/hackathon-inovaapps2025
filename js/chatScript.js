@@ -166,10 +166,10 @@ function mostrarTooltipConfirmacao() {
 
     // centraliza no meio da tela
     tooltip.style.position = "fixed";
-    tooltip.style.top = "50%";
+    tooltip.style.top = "10%";
     tooltip.style.left = "50%";
     tooltip.style.transform = "translate(-50%, -50%)";
-    tooltip.style.background = "#92fa56";
+    tooltip.style.background = "#293f2bef";
     tooltip.style.color = "white";
     tooltip.style.padding = "15px 24px";
     tooltip.style.fontSize = "16px";
