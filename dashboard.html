@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solve.Ai — Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f5f7fb;
+    }
+
+    .card-dashboard {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: #000;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 150px;
+    }
+
+    .card-dashboard:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-dashboard i {
+      font-size: 2.5rem;
+      color: #556ee6;
+      margin-bottom: 1rem;
+    }
+
+    .card-dashboard h2 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .card-dashboard small {
+      color: #6c757d;
+    }
+
+    .chart-container {
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
+
+    <!-- Top section -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 w-100 mb-5" style="max-width:900px;">
+      <div class="d-flex align-items-center gap-3">
+        <img src="images/logo.png" alt="Logo Solve.Ai"
+          style="width:64px; height:64px; border-radius:14px; background:#0a1a33; padding:8px;">
+        <div>
+          <h2 class="fw-bold mb-0">Solve.Ai</h2>
+          <small class="text-muted">Dashboard de Chamados</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="d-flex gap-3 flex-wrap justify-content-center mb-5">
+      <div class="card-dashboard">
+        <i class="bi bi-list-ul"></i>
+        <h2 id="total-chamados">0</h2>
+        <small>Total de Chamados</small>
+      </div>
+
+      <div class="card-dashboard">
+        <i class="bi bi-folder-open"></i>
+        <h2 id="chamados-abertos">0</h2>
+        <small>Chamados Abertos</small>
+      </div>
+
+      <div class="card-dashboard">
+        <i class="bi bi-check2-circle"></i>
+        <h2 id="chamados-fechados">0</h2>
+        <small>Chamados Fechados</small>
+      </div>
+    </div>
+
+    <!-- Gráfico de Rosca -->
+    <div class="chart-container">
+      <canvas id="statusChart"></canvas>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Inicializa window.chamados a partir do localStorage
+    window.chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+    let chamados = window.chamados; // referência local
+
+    // Referências aos elementos HTML
+    const totalEl = document.getElementById('total-chamados');
+    const abertosEl = document.getElementById('chamados-abertos');
+    const fechadosEl = document.getElementById('chamados-fechados');
+    const ctx = document.getElementById('statusChart').getContext('2d');
+
+    // Cria gráfico de rosca
+    const statusChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Abertos', 'Fechados'],
+        datasets: [{
+          data: [0, 0],
+          backgroundColor: ['#556ee6', '#28a745'],
+          borderColor: '#f5f7fb',
+          borderWidth: 2,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 20, padding: 15 } },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.parsed;
+                const total = statusChart.data.datasets[0].data.reduce((a,b)=>a+b,0);
+                const percent = total ? ((value/total)*100).toFixed(1) : 0;
+                return `${label}: ${value} (${percent}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Função para atualizar cards e gráfico
+    function atualizarDashboard() {
+      const total = chamados.length;
+      const abertos = chamados.filter(c => c.status.toLowerCase() === 'aberto').length;
+      const fechados = chamados.filter(c => c.status.toLowerCase() === 'fechado').length;
+
+      totalEl.textContent = total;
+      abertosEl.textContent = abertos;
+      fechadosEl.textContent = fechados;
+
+      statusChart.data.datasets[0].data = [abertos, fechados];
+      statusChart.update();
+    }
+
+    // Função para adicionar chamado
+    window.adicionarChamado = (chamado) => {
+      chamados.push(chamado);
+      window.chamados = chamados;
+      localStorage.setItem("chamados", JSON.stringify(chamados));
+      atualizarDashboard();
+    };
+
+    // Inicializa dashboard ao carregar a página
+    window.addEventListener('DOMContentLoaded', atualizarDashboard);
+  </script>
+</body>
+</html>
