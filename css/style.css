@@ -1,8 +1,8 @@
 :root {
---accent: #556ee6;
+--accent: #502C87;
 --muted: #6c757d;
 --topbar-nav-link: #6d6b70;
---topbar-nav-link-active-bg: #000000;
+--topbar-nav-link-active-bg: #502C87;
 --topbar-nav-link-active-color: #fff;
 --topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
 --card-chat-shadow: rgba(15, 23, 42, 0.06);
@@ -10,23 +10,23 @@
 --messages-bg-gradient-2: #eef3ff;
 --messages-bg-gradient-3: #ffffff;
 --messages-bg-gradient-4: #fbfdff;
---msg-user-gradient-1: #6a7dff;
---msg-user-gradient-2: #556ee6;
+--msg-user-gradient-1: #764ab8;
+--msg-user-gradient-2: #502C87;
 --ticket-open-color: #a6acff;
 --ticket-pending-bg: #fff4e5;
 --ticket-pending-color: #ffe263;
 --ticket-closed-bg: #dfeee6;
 --ticket-closed-color: #92fa56;
 --no-data: #6c757d;
---body-bg-gradient-1: #f9fafe;
---body-bg-gradient-2: #e0f0ff;
---body-bg-gradient-3: #e6e0ff;
---body-bg-gradient-4: #ffe6f0;
+--body-bg-gradient-1: #E7E3EB;
+--body-bg-gradient-2: #F2EAEB;
+--body-bg-gradient-3: #F5DED8;
+--body-bg-gradient-4: #F9D9CD;
 --topbar-bg: rgba(255, 255, 255, 0.55);
 --topbar-border: rgba(255, 255, 255, 0.4);
 --topbar-shadow: rgba(15, 23, 42, 0.08);
---btn-primary-gradient-1: #6a7dff;
---btn-primary-gradient-2: #556ee6;
+--btn-primary-gradient-1: #f15117;
+--btn-primary-gradient-2: #d64611;
 --btn-primary-shadow: rgba(85, 110, 230, 0.3);
 --btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
 --messages-bg: rgba(255, 255, 255, 0.4);
@@ -36,7 +36,7 @@
 --msg-ai-color: #1f2937;
 --msg-ai-border: rgba(86, 103, 204, 0.06);
 --dot-bg: #333;
---card-dashboard-inside-border: var(--muted);
+
 
 }
 
@@ -104,7 +104,6 @@ body {
     background: var(--topbar-nav-link-active-bg);
     font-weight: 600;
     color: var(--topbar-nav-link-active-color) !important;
-    box-shadow: 0 6px 18px var(--topbar-nav-link-shadow) inset;
 }
 
 
@@ -401,11 +400,31 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-    border-left: 1px solid var(--card-dashboard-inside-border);
+    border-left: 1px solid #502C87;
   padding-left: 20px;
+}
+
+.card-dashboard-inside:has(#chamados-fechados) {
+  border-left: 1px solid #7be63d;
+}
+
+.card-dashboard-inside:has(#chamados-abertos) {
+  border-left: 1px solid #9097fc;
 }
 
 .loading-icon {
   height: 22px;
 }
 
+.btn-danger {
+  background-color: #fff !important;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.btn-danger:hover,
+.btn-danger:active {
+  background-color: #fff !important;
+  color: black;
+  border: 1px solid #808080;
+}

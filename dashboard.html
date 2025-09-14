@@ -32,8 +32,12 @@
 
     .card-dashboard i {
       font-size: 2rem;
-      color: #556ee6;
+      color: #502C87;
       padding-right: 10px;
+    }
+
+    .card-dashboard:has(#chamados-fechados) i  {
+      color: #7be63d;
     }
 
     .card-dashboard h2 {
@@ -179,7 +183,7 @@
         labels: ['Abertos', 'Fechados'],
         datasets: [{
           data: [0, 0],
-          backgroundColor: ['#556ee6', '#28a745'],
+          backgroundColor: ['#a6acff', '#92fa56'],
           borderColor: '#f5f7fb',
           borderWidth: 2,
           hoverOffset: 10

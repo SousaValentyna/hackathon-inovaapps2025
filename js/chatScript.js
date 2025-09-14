@@ -169,7 +169,7 @@ function mostrarTooltipConfirmacao() {
     tooltip.style.top = "50%";
     tooltip.style.left = "50%";
     tooltip.style.transform = "translate(-50%, -50%)";
-    tooltip.style.background = "#198754";
+    tooltip.style.background = "#92fa56";
     tooltip.style.color = "white";
     tooltip.style.padding = "15px 24px";
     tooltip.style.fontSize = "16px";
