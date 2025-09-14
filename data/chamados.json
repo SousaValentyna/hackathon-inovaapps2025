@@ -1,0 +1,22 @@
+{
+  "chamados": [
+    {
+      "id": 1,
+      "titulo": "Erro no login",
+      "descricao": "O usuário não consegue acessar o sistema com suas credenciais.",
+      "status": "Aberto"
+    },
+    {
+      "id": 2,
+      "titulo": "Falha na geração de relatório",
+      "descricao": "O relatório mensal não está sendo gerado corretamente, apresentando dados incompletos.",
+      "status": "Em andamento"
+    },
+    {
+      "id": 3,
+      "titulo": "Atualização de sistema",
+      "descricao": "Solicitação para atualizar o sistema para a versão mais recente.",
+      "status": "Concluído"
+    }
+  ]
+}
