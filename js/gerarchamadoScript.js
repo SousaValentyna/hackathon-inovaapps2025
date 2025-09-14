@@ -27,7 +27,7 @@ window.criarChamado = async function() {
     id: window.chamados.length + 1,
     titulo: titulo,
     descricao: descricao,
-    status: "aberto"
+    status: "Aberto"
   };
 
   window.chamados.push(novoChamado);

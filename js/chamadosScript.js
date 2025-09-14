@@ -29,6 +29,8 @@ function renderChamados() {
         noTickets.classList.add("d-none");
         filtrados.forEach(chamado => {
             const item = document.createElement("div");
+            const statusCapitalizado = chamado.status.charAt(0).toUpperCase() + chamado.status.slice(1);
+
             item.className = "list-group-item list-group-item-action flex-column align-items-start";
             item.innerHTML = `
         <div class="d-flex w-100 justify-content-between">
@@ -36,7 +38,7 @@ function renderChamados() {
             <small class="text-muted">ID: ${chamado.id}</small>
         </div>
         <p class="mb-1">${chamado.descricao}</p>
-        <small>Status: ${chamado.status}</small>
+        <small class="status-group" >Status: <div class="btn-status"> ${statusCapitalizado} </div> </small>
     `;
             // Adiciona clique para redirecionar para a tela de alteração de status
             item.addEventListener("click", () => {

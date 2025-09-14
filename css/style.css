@@ -123,7 +123,26 @@ body {
     z-index: 3;
 }
 
-.list-group
+.list-group {
+  gap: 6px
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.status-group {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-status {
+  color: #333;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
 
 .ticket-pill {
     font-size: .82rem;
