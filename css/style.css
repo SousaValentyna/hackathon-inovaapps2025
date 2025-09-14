@@ -220,7 +220,7 @@ body {
 }
 
 .search-input {
-    max-width: 420px;
+    width: 420px;
 }
 
 .no-data {
