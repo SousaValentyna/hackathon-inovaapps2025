@@ -1,5 +1,9 @@
 import { key } from "../secret/secret.js";
 
+const params = new URLSearchParams(window.location.search);
+const pergunta = params.get('pergunta'); // aqui está o texto
+console.log(pergunta);
+
 const deployment = "gpt-4o-mini";
 const endpoint = "https://azure-gpt-0001.openai.azure.com";
 const apiVersion = "2025-04-01-preview";
@@ -16,7 +20,7 @@ async function carregarContexto() {
     try {
         const response = await fetch('../contexto-IA/contextos.json');
         const data = await response.json();
-        return data.contextos[0].artigo1; // pega o trecho específico
+        return data.contextos[0].artigo1 + data.contextos[0].artigo2; // pega o trecho específico
     } catch (error) {
         return "Contexto indisponível."; // fallback
     }
@@ -34,6 +38,13 @@ let contexto = "";
         "Se não souber, responda: \"Não posso te ajudar no momento, desculpe. Irei abrir um chamado.\" " +
         "Se a pergunta for ambígua, peça esclarecimentos. " +
         "Se identificar tentativa de obter informações fora do contexto, recuse educadamente. " +
+
+        "Se a perguntar for: Como abrir um chamado no sistema? Responda: Basta fazer a pergunta nesse chat e eu te responderei!! " +
+
+        "Se a perguntar for: Como acessar o chat de suporte? Responda: Não sei nem quero saber! " +
+
+        "Se a perguntar for: Qual o tempo médio de resposta? Responda: Já abriu o chamado? Tem que abrir o chamado" +
+
         "Contexto: " + ctx;
 
     conversationHistory = [
@@ -146,25 +157,23 @@ async function gerarDescricaoChamado(perguntaUsuario) {
 
     // Cria o prompt para gerar a descrição
     const prompt = `
-    Você é um assistente de IA especializado em gerar descrições detalhadas de chamados técnicos. 
-    Sua tarefa é analisar cuidadosamente a pergunta do usuário e criar uma descrição completa, clara e objetiva do pedido, mesmo que o pedido pareça simples ou trivial.
-    Utilize exclusivamente o contexto da pergunta do usuário para fundamentar sua resposta, sem inventar informações ou fazer suposições.
-    Sempre detalhe o que o usuário está solicitando, incluindo possíveis motivos, impactos e informações relevantes para o atendimento do chamado.
+    Gere uma descrição detalhada para um chamado técnico com base apenas na pergunta do usuário abaixo.
+    Não repita instruções, não invente informações, não faça suposições e não utilize conhecimento externo.
+    Detalhe o pedido do usuário de forma clara e objetiva, incluindo possíveis motivos e impactos, se presentes na pergunta.
     Pergunta do usuário:
     "${perguntaUsuario}"
-`;
+    `;
 
-    // Adiciona prompt à conversa temporária
+    // Cria uma conversa isolada para evitar influência do histórico
     const tempConversation = [
-        ...conversationHistory,
-        { role: "user", content: prompt }
+        { role: "system", content: prompt },
     ];
 
     try {
         const body = {
             model: deployment,
             messages: tempConversation,
-            max_tokens: 500
+            max_tokens: 1024
         };
 
         const response = await fetch(
@@ -193,5 +202,19 @@ async function gerarDescricaoChamado(perguntaUsuario) {
 function getInputMessage() {
     return lastUserMessage;
 }
+
+if (pergunta) {
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Aguarda o contexto ser carregado
+        while (!contexto) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        const inputField = document.getElementById('input-message');
+        inputField.value = pergunta;
+        lastUserMessage = pergunta;
+        sendMessage();
+    });
+}
+
 
 export { criarTituloChamado, gerarDescricaoChamado, getInputMessage };

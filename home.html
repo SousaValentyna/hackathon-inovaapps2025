@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,83 +15,100 @@
       align-items: center;
       padding: 1rem 1.5rem;
       border-radius: 12px;
-      background: rgba(255,255,255,0.8);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
       text-decoration: none;
       color: #000;
     }
+
     .faq-item:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
+
     .faq-item i {
       font-size: 1.2rem;
       color: #556ee6;
     }
   </style>
 </head>
+
 <body>
   <div class="container min-vh-100 d-flex justify-content-center align-items-center">
     <div class="d-flex flex-column gap-5 w-100" style="max-width:900px;">
 
       <!-- Top section -->
-<div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
 
-  <div class="d-flex align-items-center gap-3">
-    <img src="images/logo.png" alt="Logo Solve.Ai"
-         style="width:64px; height:64px; border-radius:14px; background:#0a1a33; padding:8px;">
-    <div>
-      <h2 class="fw-bold mb-0">Solve.Ai</h2>
-      <small class="text-muted">Central de Suporte</small>
-    </div>
-  </div>
+        <div class="d-flex align-items-center gap-3">
+          <img src="images/logo.png" alt="Logo Solve.Ai"
+            style="width:64px; height:64px; border-radius:14px; background:#0a1a33; padding:8px;">
+          <div>
+            <h2 class="fw-bold mb-0">Solve.Ai</h2>
+            <small class="text-muted">Central de Suporte</small>
+          </div>
+        </div>
 
-  <!-- Cards de navegação -->
-  <div class="d-flex gap-3 flex-wrap">
-    <a href="index.html" class="card-nav text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center p-4"
-       style="width:180px; height:180px; border-radius:16px; background:rgba(255,255,255,0.85); box-shadow:0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;">
-      <i class="bi bi-chat-dots mb-3" style="font-size:2rem; color:#556ee6;"></i>
-      <strong>Iniciar conversa</strong>
-      <small class="text-muted text-center">Tire suas dúvidas aqui</small>
-    </a>
+        <!-- Cards de navegação -->
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="chat.html"
+            class="card-nav text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center p-4"
+            style="width:180px; height:180px; border-radius:16px; background:rgba(255,255,255,0.85); box-shadow:0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;">
+            <i class="bi bi-chat-dots mb-3" style="font-size:2rem; color:#556ee6;"></i>
+            <strong>Iniciar conversa</strong>
+            <small class="text-muted text-center">Tire suas dúvidas aqui</small>
+          </a>
 
-    <a href="chamados.html" class="card-nav text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center p-4"
-       style="width:180px; height:180px; border-radius:16px; background:rgba(255,255,255,0.85); box-shadow:0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;">
-      <i class="bi bi-list-ul mb-3" style="font-size:2rem; color:#556ee6;"></i>
-      <strong>Ver lista de chamados</strong>
-    </a>
-  </div>
+          <a href="chamados.html"
+            class="card-nav text-decoration-none text-dark d-flex flex-column justify-content-center align-items-center p-4"
+            style="width:180px; height:180px; border-radius:16px; background:rgba(255,255,255,0.85); box-shadow:0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s;">
+            <i class="bi bi-list-ul mb-3" style="font-size:2rem; color:#556ee6;"></i>
+            <strong>Ver lista de chamados</strong>
+          </a>
+        </div>
 
-</div>
+      </div>
 
 
       <!-- FAQ List -->
-<div class="d-flex flex-column gap-3">
-  <h3 class="fw-bold mb-3">Perguntas Frequentes</h3>
+      <div class="d-flex flex-column gap-3">
+        <h3 class="fw-bold mb-3">Perguntas Frequentes</h3>
 
-  <div class="faq-item" data-pergunta="Como abrir um chamado no sistema?">
-    <span>Como abrir um chamado no sistema?</span>
-    <i class="bi bi-arrow-up-right"></i>
-  </div>
+        <div class="faq-item" data-pergunta="Como abrir um chamado no sistema?">
+          <span>Como abrir um chamado no sistema?</span>
+          <i class="bi bi-arrow-up-right"></i>
+        </div>
 
-  <div class="faq-item" data-pergunta="Como acessar o chat de suporte?">
-    <span>Como acessar o chat de suporte?</span>
-    <i class="bi bi-arrow-up-right"></i>
-  </div>
 
-  <div class="faq-item" data-pergunta="Qual o tempo médio de resposta?">
-    <span>Qual o tempo médio de resposta?</span>
-    <i class="bi bi-arrow-up-right"></i>
-  </div>
-</div>
+        <div class="faq-item" data-pergunta="Como acessar o chat de suporte?">
+          <span>Como acessar o chat de suporte?</span>
+          <i class="bi bi-arrow-up-right"></i>
+        </div>
+
+        <div class="faq-item" data-pergunta="Qual o tempo médio de resposta?">
+          <span>Qual o tempo médio de resposta?</span>
+          <i class="bi bi-arrow-up-right"></i>
+        </div>
+      </div>
 
 
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script></script>
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const pergunta = encodeURIComponent(item.dataset.pergunta); // codifica para URL
+        window.location.href = `chat.html?pergunta=${pergunta}`;
+      });
+    });
+
+  </script>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-import { criarTituloChamado, gerarDescricaoChamado, getInputMessage } from './script.js';
+import { criarTituloChamado, gerarDescricaoChamado, getInputMessage } from './chatScript.js';
 
 // ============================
 // Inicializa array de chamados
@@ -64,9 +64,6 @@ if (messagesDiv) {
   console.error("Container #messages não encontrado!");
 }
 
-// ============================
-// Opcional: funções para outros scripts
-// ============================
 window.getChamados = () => window.chamados;
 window.adicionarChamado = (chamado) => {
   window.chamados.push(chamado);
