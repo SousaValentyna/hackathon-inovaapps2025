@@ -123,9 +123,7 @@ function addLoadingMessage() {
     msg.classList.add("msg", "ai");
 
     msg.innerHTML = `
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+         <img src="images/loading.gif" alt="Carregando..." class="loading-icon">
     `;
 
     output.appendChild(msg);
