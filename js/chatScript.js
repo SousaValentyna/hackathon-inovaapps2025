@@ -1,3 +1,5 @@
+import { key } from "../secret/secret.js";
+
 const params = new URLSearchParams(window.location.search);
 const pergunta = params.get('pergunta'); // aqui está o texto
 console.log(pergunta);
@@ -5,7 +7,7 @@ console.log(pergunta);
 const deployment = "gpt-4o-mini";
 const endpoint = "https://azure-gpt-0001.openai.azure.com";
 const apiVersion = "2025-04-01-preview";
-const apiKey = "5azYix8vQ82DP70GmSzWZDk7yh3jyMRaaZqS6gpOcJDCUvAMiQa0JQQJ99BHACYeBjFXJ3w3AAABACOGl6LS";
+const apiKey = key;
 
 const input = document.getElementById("input-message")
 const output = document.getElementById("messages")
@@ -46,8 +48,8 @@ let contexto = "";
         "Contexto: " + ctx;
 
     conversationHistory = [
-        { role: "system", content: contexto }
-    ];
+    { role: "system", content: contexto }
+];
 })();
 
 sendBtn.addEventListener("click", sendMessage);
@@ -64,7 +66,7 @@ async function sendMessage() {
 
     addMessage(text, "user");
     conversationHistory.push({ role: "user", content: text });
-    lastUserMessage = text;
+    lastUserMessage = text;    
     input.value = "";
 
     // adiciona "..." animados enquanto carrega
@@ -155,9 +157,9 @@ async function gerarDescricaoChamado(perguntaUsuario) {
 
     // Cria o prompt para gerar a descrição
     const prompt = `
-    Gere uma descrição curta (máximo 2 frases, até 200 caracteres) para um chamado técnico 
-    com base apenas na pergunta do usuário abaixo.
+    Gere uma descrição detalhada para um chamado técnico com base apenas na pergunta do usuário abaixo.
     Não repita instruções, não invente informações, não faça suposições e não utilize conhecimento externo.
+    Detalhe o pedido do usuário de forma clara e objetiva, incluindo possíveis motivos e impactos, se presentes na pergunta.
     Pergunta do usuário:
     "${perguntaUsuario}"
     `;
@@ -171,7 +173,7 @@ async function gerarDescricaoChamado(perguntaUsuario) {
         const body = {
             model: deployment,
             messages: tempConversation,
-            max_tokens: 150
+            max_tokens: 1024
         };
 
         const response = await fetch(
