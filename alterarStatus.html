@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alterar Status — Chamado</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container py-4">
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Alterar Status do Chamado</h5>
+        <a href="chamados.html" class="btn btn-sm btn-secondary">Voltar</a>
+      </div>
+      <div class="card-body">
+        <div id="chamado-info" class="mb-3">
+          <!-- Informações do chamado serão preenchidas via JS -->
+        </div>
+        <div class="mb-3">
+          <label for="status-select" class="form-label">Novo Status</label>
+          <select id="status-select" class="form-select">
+            <option value="aberto">Aberto</option>
+            <option value="em andamento">Em andamento</option>
+            <option value="fechado">Fechado</option>
+          </select>
+        </div>
+        <button id="btn-salvar" class="btn btn-primary">Salvar Alteração</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Pega o ID do chamado selecionado
+    const chamadoId = localStorage.getItem("chamadoSelecionadoId");
+    const chamados = JSON.parse(localStorage.getItem("chamados")) || [];
+    const chamado = chamados.find(c => c.id.toString() === chamadoId);
+
+    const chamadoInfo = document.getElementById("chamado-info");
+    const statusSelect = document.getElementById("status-select");
+    const btnSalvar = document.getElementById("btn-salvar");
+
+    if (chamado) {
+        chamadoInfo.innerHTML = `
+            <p><strong>ID:</strong> ${chamado.id}</p>
+            <p><strong>Título:</strong> ${chamado.titulo}</p>
+            <p><strong>Descrição:</strong> ${chamado.descricao}</p>
+            <p><strong>Status atual:</strong> ${chamado.status}</p>
+        `;
+        statusSelect.value = chamado.status;
+    } else {
+        chamadoInfo.innerHTML = `<div class="alert alert-danger">Chamado não encontrado!</div>`;
+        btnSalvar.disabled = true;
+    }
+
+    btnSalvar.addEventListener("click", () => {
+        chamado.status = statusSelect.value;
+        localStorage.setItem("chamados", JSON.stringify(chamados));
+        alert("Status atualizado com sucesso!");
+        window.location.href = "chamados.html";
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

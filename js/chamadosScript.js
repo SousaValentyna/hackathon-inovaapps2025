@@ -19,7 +19,7 @@ function renderChamados() {
     const filtrados = window.chamados.filter(chamado => {
         const statusOk = filtro === "todos" || chamado.status.toLowerCase().trim() === filtro;
         const pesquisaOk = chamado.titulo.toLowerCase().includes(pesquisa) ||
-                           chamado.id.toString().includes(pesquisa);
+            chamado.id.toString().includes(pesquisa);
         return statusOk && pesquisaOk;
     });
 
@@ -31,15 +31,21 @@ function renderChamados() {
             const item = document.createElement("div");
             item.className = "list-group-item list-group-item-action flex-column align-items-start";
             item.innerHTML = `
-                <div class="d-flex w-100 justify-content-between">
-                    <h6 class="mb-1">${chamado.titulo}</h6>
-                    <small class="text-muted">ID: ${chamado.id}</small>
-                </div>
-                <p class="mb-1">${chamado.descricao}</p>
-                <small>Status: ${chamado.status}</small>
-            `;
+        <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1">${chamado.titulo}</h6>
+            <small class="text-muted">ID: ${chamado.id}</small>
+        </div>
+        <p class="mb-1">${chamado.descricao}</p>
+        <small>Status: ${chamado.status}</small>
+    `;
+            // Adiciona clique para redirecionar para a tela de alteração de status
+            item.addEventListener("click", () => {
+                localStorage.setItem("chamadoSelecionadoId", chamado.id);
+                window.location.href = "alterarStatus.html";
+            });
             ticketsList.appendChild(item);
         });
+
     }
 
     badge.textContent = window.chamados.length;
