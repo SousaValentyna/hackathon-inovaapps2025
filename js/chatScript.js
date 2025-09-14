@@ -1,3 +1,4 @@
+import { key } from "../secret/secret.js";
 const params = new URLSearchParams(window.location.search);
 const pergunta = params.get('pergunta'); // aqui está o texto
 console.log(pergunta);
@@ -5,7 +6,7 @@ console.log(pergunta);
 const deployment = "gpt-4o-mini";
 const endpoint = "https://azure-gpt-0001.openai.azure.com";
 const apiVersion = "2025-04-01-preview";
-const apiKey = "5azYix8vQ82DP70GmSzWZDk7yh3jyMRaaZqS6gpOcJDCUvAMiQa0JQQJ99BHACYeBjFXJ3w3AAABACOGl6LS";
+const apiKey = key;
 
 const input = document.getElementById("input-message")
 const output = document.getElementById("messages")
