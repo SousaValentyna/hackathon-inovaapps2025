@@ -1,6 +1,76 @@
 :root {
     --accent: #556ee6;
     --muted: #6c757d;
+    --topbar-nav-link: #6d6b70;
+    --topbar-nav-link-active-bg: #000000;
+    --topbar-nav-link-active-color: #fff;
+    --topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
+    --card-chat-shadow: rgba(15, 23, 42, 0.06);
+    --messages-bg-gradient-1: #f7f8fb;
+    --messages-bg-gradient-2: #eef3ff;
+    --messages-bg-gradient-3: #ffffff;
+    --messages-bg-gradient-4: #fbfdff;
+    --msg-user-gradient-1: #6a7dff;
+    --msg-user-gradient-2: #556ee6;
+    --ticket-pending-bg: #fff4e5;
+    --ticket-pending-color: #7a5a00;
+    --ticket-closed-bg: #dfeee6;
+    --ticket-closed-color: #0f5132;
+    --no-data: #6c757d;
+    --body-bg-gradient-1: #f9fafe;
+    --body-bg-gradient-2: #e0f0ff;
+    --body-bg-gradient-3: #e6e0ff;
+    --body-bg-gradient-4: #ffe6f0;
+    --topbar-bg: rgba(255, 255, 255, 0.55);
+    --topbar-border: rgba(255, 255, 255, 0.4);
+    --topbar-shadow: rgba(15, 23, 42, 0.08);
+    --btn-primary-gradient-1: #6a7dff;
+    --btn-primary-gradient-2: #556ee6;
+    --btn-primary-shadow: rgba(85, 110, 230, 0.3);
+    --btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
+    --messages-bg: rgba(255, 255, 255, 0.4);
+    --chat-footer-bg: rgba(255, 255, 255, 0.55);
+    --chat-footer-border: rgba(255, 255, 255, 0.3);
+    --msg-ai-bg: #ffffff;
+    --msg-ai-color: #1f2937;
+    --msg-ai-border: rgba(86, 103, 204, 0.06);
+    --dot-bg: #333;
+    --card-dashboard-inside-border: var(--muted);
+    --topbar-nav-link: #6d6b70;
+    --topbar-nav-link-active-bg: #000000;
+    --topbar-nav-link-active-color: #fff;
+    --topbar-nav-link-shadow: rgba(85, 110, 230, 0.45);
+    --card-chat-shadow: rgba(15, 23, 42, 0.06);
+    --messages-bg-gradient-1: #f7f8fb;
+    --messages-bg-gradient-2: #eef3ff;
+    --messages-bg-gradient-3: #ffffff;
+    --messages-bg-gradient-4: #fbfdff;
+    --msg-user-gradient-1: #6a7dff;
+    --msg-user-gradient-2: #556ee6;
+    --ticket-pending-bg: #fff4e5;
+    --ticket-pending-color: #7a5a00;
+    --ticket-closed-bg: #dfeee6;
+    --ticket-closed-color: #0f5132;
+    --no-data: #6c757d;
+    --body-bg-gradient-1: #f9fafe;
+    --body-bg-gradient-2: #e0f0ff;
+    --body-bg-gradient-3: #e6e0ff;
+    --body-bg-gradient-4: #ffe6f0;
+    --topbar-bg: rgba(255, 255, 255, 0.55);
+    --topbar-border: rgba(255, 255, 255, 0.4);
+    --topbar-shadow: rgba(15, 23, 42, 0.08);
+    --btn-primary-gradient-1: #6a7dff;
+    --btn-primary-gradient-2: #556ee6;
+    --btn-primary-shadow: rgba(85, 110, 230, 0.3);
+    --btn-primary-hover-shadow: rgba(85, 110, 230, 0.4);
+    --messages-bg: rgba(255, 255, 255, 0.4);
+    --chat-footer-bg: rgba(255, 255, 255, 0.55);
+    --chat-footer-border: rgba(255, 255, 255, 0.3);
+    --msg-ai-bg: #ffffff;
+    --msg-ai-color: #1f2937;
+    --msg-ai-border: rgba(86, 103, 204, 0.06);
+    --dot-bg: #333;
+    --card-dashboard-inside-border: var(--muted);
 }
 
 html,
@@ -16,7 +86,7 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #f7f8fb 0%, #eef3ff 100%);
+    background: linear-gradient(180deg, var(--messages-bg-gradient-1) 0%, var(--messages-bg-gradient-2) 100%);
     font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 
@@ -49,8 +119,8 @@ body {
 }
 
 .topbar .nav-link {
-    color: #6d6b70 !important;
-    background: #fff;
+    color: var(--topbar-nav-link) !important;
+    background: var(--messages-bg-gradient-3);
     border-radius: 12px;
     padding: 0.45rem 1rem;
     font-weight: 500;
@@ -64,10 +134,10 @@ body {
 
 /* Estado ativo */
 .topbar .nav-link.active {
-    background: #000000;
+    background: var(--topbar-nav-link-active-bg);
     font-weight: 600;
-    color: #fff !important;
-    box-shadow: 0 6px 18px rgba(85, 110, 230, 0.45) inset;
+    color: var(--topbar-nav-link-active-color) !important;
+    box-shadow: 0 6px 18px var(--topbar-nav-link-shadow) inset;
 }
 
 
@@ -82,7 +152,7 @@ body {
     flex-direction: column;
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 6px 18px var(--card-chat-shadow);
 }
 
 .messages {
@@ -92,7 +162,7 @@ body {
     /* barra de rolagem vertical interna */
     padding: 1.1rem;
     padding-bottom: 1.6rem;
-    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    background: linear-gradient(180deg, var(--messages-bg-gradient-3), var(--messages-bg-gradient-4));
 }
 
 .msg {
@@ -108,8 +178,8 @@ body {
 
 .msg.user {
     margin-left: auto;
-    background: linear-gradient(90deg, #6a7dff, #556ee6);
-    color: #fff;
+    background: linear-gradient(90deg, var(--msg-user-gradient-1), var(--msg-user-gradient-2));
+    color: var(--topbar-nav-link-active-color);
     border-bottom-right-radius: 2px;
 }
 
@@ -152,13 +222,13 @@ body {
 }
 
 .ticket-pending {
-    background: #fff4e5;
-    color: #7a5a00;
+    background: var(--ticket-pending-bg);
+    color: var(--ticket-pending-color);
 }
 
 .ticket-closed {
-    background: #dfeee6;
-    color: #0f5132;
+    background: var(--ticket-closed-bg);
+    color: var(--ticket-closed-color);
 }
 
 .nav-link.active {
@@ -171,7 +241,7 @@ body {
 }
 
 .no-data {
-    color: var(--muted);
+    color: var(--no-data);
 }
 
 .sidebar .nav {
@@ -253,39 +323,39 @@ body {
 
 /* Fundo suave com gradiente pastel */
 body {
-    background: linear-gradient(135deg, #f9fafe 0%, #e0f0ff 25%, #e6e0ff 55%, #ffe6f0 100%);
+    background: linear-gradient(135deg, var(--body-bg-gradient-1) 0%, var(--body-bg-gradient-2) 25%, var(--body-bg-gradient-3) 55%, var(--body-bg-gradient-4) 100%);
     font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 
 /* Estilo glass para caixas principais */
 .topbar,
 .card-chat {
-    background: rgba(255, 255, 255, 0.55) !important;
+    background: var(--topbar-bg) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--topbar-border);
     border-radius: 18px;
-    box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 8px 28px var(--topbar-shadow);
     transition: all 0.25s ease;
 }
 
 /* Hover suave em botões */
 .btn-primary {
-    background: linear-gradient(135deg, #6a7dff, #556ee6);
+    background: linear-gradient(135deg, var(--btn-primary-gradient-1), var(--btn-primary-gradient-2));
     border: none;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(85, 110, 230, 0.3);
+    box-shadow: 0 4px 12px var(--btn-primary-shadow);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(85, 110, 230, 0.4);
+    box-shadow: 0 6px 18px var(--btn-primary-hover-shadow);
 }
 
 /* Área de mensagens com leve transparência */
 .messages {
-    background: rgba(255, 255, 255, 0.4);
+    background: var(--messages-bg);
     backdrop-filter: blur(12px);
     border-radius: 16px;
     padding: 1.2rem;
@@ -295,18 +365,18 @@ body {
 
 /* Footer com vidro */
 .chat-footer {
-    background: rgba(255, 255, 255, 0.55);
+    background: var(--chat-footer-bg);
     backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top: 1px solid var(--chat-footer-border);
     border-radius: 0 0 18px 18px;
 }
 
 .msg.ai {
     display: block;
     /* importante: bloco, deixa o markdown fluir */
-    background: #ffffff;
-    color: #1f2937;
-    border: 1px solid rgba(86, 103, 204, 0.06);
+    background: var(--msg-ai-bg);
+    color: var(--msg-ai-color);
+    border: 1px solid var(--msg-ai-border);
     border-bottom-left-radius: 2px;
     border-radius: 8px;
     padding: .6rem .9rem;
@@ -319,7 +389,7 @@ body {
 .dot {
     width: 6px;
     height: 6px;
-    background: #333;
+    background: var(--dot-bg);
     border-radius: 50%;
     animation: bounce 1.2s infinite;
 }
@@ -352,7 +422,7 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  border-left: 1px solid var(--muted);
+    border-left: 1px solid var(--card-dashboard-inside-border);
   padding-left: 20px;
 }
 
