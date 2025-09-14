@@ -8,6 +8,10 @@ body {
     height: 100%;
 }
 
+p {
+  margin: 0 !important;
+}
+
 body {
     min-height: 100%;
     display: flex;
@@ -118,6 +122,8 @@ body {
     bottom: 0;
     z-index: 3;
 }
+
+.list-group
 
 .ticket-pill {
     font-size: .82rem;
@@ -288,7 +294,6 @@ body {
     margin: 6px 0;
     width: fit-content;
     word-wrap: break-word;
-    white-space: pre-wrap;
     line-height: 1.5;
 }
 
@@ -331,3 +336,8 @@ body {
   border-left: 1px solid var(--muted);
   padding-left: 20px;
 }
+
+.loading-icon {
+  height: 22px;
+}
+
