@@ -4,16 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Solve.Ai — Dashboard</title>
+  <title>Ajuda.Ai — Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="css/style.css" rel="stylesheet">
   <style>
-    body {
-      background: #f5f7fb;
-    }
-
     .card-dashboard {
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.85);
@@ -21,12 +17,12 @@
       transition: transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       color: #000;
-      padding: 2rem 1.5rem;
+      padding: 20px 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 150px;
+      min-height: 100px;
     }
 
     .card-dashboard:hover {
@@ -35,9 +31,9 @@
     }
 
     .card-dashboard i {
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: #556ee6;
-      margin-bottom: 1rem;
+      padding-right: 10px;
     }
 
     .card-dashboard h2 {
@@ -56,54 +52,168 @@
       padding: 2rem;
       max-width: 500px;
       margin: 0 auto;
+      height: 100%;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
     }
   </style>
 </head>
 
 <body>
-  <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
+  <div class="app-shell container">
+        <div class="d-flex flex-column gap-2">
 
+            <!-- Topbar -->
+            <header class="topbar bg-white rounded shadow-sm p-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="brand-compact d-flex align-items-center">
+                        <div style="width:46px; height:46px; display:grid; place-items:center;">
+                            <a href="home.html">
+                                <img src="images/logo.png" alt="Logo Solve.Ai"
+                                    style="padding:6px; width:46px; height:46px; object-fit:cover; background:#0a1a33; border-radius:12px;">
+                            </a>
+                        </div>
+                        <div class="ms-2 d-none d-md-block">
+                            <div style="font-weight:700">Ajuda.Ai</div>
+                            <small class="text-muted">Central de Suporte</small>
+                        </div>
+                    </div>
+
+                    <nav class="">
+                        <ul class="nav" role="tablist">
+                            <li class="nav-item">
+                            <a class="nav-link px-3 py-2" href="home.html">
+                                <i class="bi bi-house-door me-1"></i>
+                                <span class="d-none d-sm-inline">Home</span>
+                            </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                            <a class="nav-link px-3 py-2" href="chat.html">
+                                <i class="bi bi-chat-dots me-1"></i>
+                                <span class="d-none d-sm-inline">Chat</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link px-3 py-2" href="chamados.html">
+                                <i class="bi bi-list-ul me-1"></i>
+                                <span class="d-none d-sm-inline">Chamados</span>
+                                <span id="badge-count" class="badge bg-secondary ms-2 d-none d-sm-inline">0</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link px-3 py-2 active" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-1"></i>
+                                <span class="d-none d-sm-inline">Dashboard</span>
+                            </a>
+                            </li>
+                        </ul>
+                        </nav>
+
+
+
+                </div>
+            </header>
+
+            <!-- Layout principal -->
+        <div class="row w-100 mb-5" style="max-width: 600px; align-self: center;">
+
+          <!-- Coluna dos Cards -->
+          <div class="col-12 col-md-5 d-flex flex-column gap-3">
+            
+            <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+              <i class="bi bi-list-ul"></i>
+              <div class="card-dashboard-inside align-items-center">
+              <h2 id="total-chamados">0</h2>
+              <small>Total de Chamados</small>
+            </div>
+            </div>
+
+            <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+              <i class="bi bi-folder2-open py-0"></i>
+              <div class="card-dashboard-inside align-items-center">
+              <h2 id="chamados-abertos">0</h2>
+              <small>Chamados Abertos</small>
+              </div>
+            </div>
+
+            <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+              <i class="bi bi-check2-circle py-0"></i>
+              <div class="card-dashboard-inside align-items-center">
+                <h2 id="chamados-fechados">0</h2>
+                <small>Chamados Fechados</small>
+              </div>
+            </div>
+
+          </div>
+
+  <!-- Coluna do Gráfico -->
+  <div class="col-12 col-md-7 d-flex justify-content-center align-items-center mt-3 mt-md-0">
+    <div class="chart-container w-100">
+      <canvas id="statusChart"></canvas>
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>
+  <!-- <div class="container min-vh-100 d-flex flex-column justify-content-center align-items-center py-5"> -->
+
+    
     <!-- Top section -->
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 w-100 mb-5" style="max-width:900px;">
+    <!-- <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 w-100 mb-5" style="max-width:900px;">
       <div class="d-flex align-items-center gap-3">
         <a href="home.html">
-          <img src="images/logo.png" alt="Logo Solve.Ai"
+          <img src="images/logo.png" alt="Logo Ajuda.Ai"
             style="width:64px; height:64px; border-radius:14px; background:#0a1a33; padding:8px;">
         </a>
         <div>
-          <h2 class="fw-bold mb-0">Solve.Ai</h2>
+          <h2 class="fw-bold mb-0">Ajuda.Ai</h2>
           <small class="text-muted">Dashboard de Chamados</small>
         </div>
       </div>
+    </div> -->
+
+<!-- Layout principal -->
+<!-- <div class="row w-100 mb-5" style="max-width: 600px;"> -->
+
+  <!-- Coluna dos Cards -->
+  <!-- <div class="col-12 col-md-5 d-flex flex-column gap-3">
+    
+    <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+      <i class="bi bi-list-ul"></i>
+      <div class="card-dashboard-inside align-items-center">
+      <h2 id="total-chamados">0</h2>
+      <small>Total de Chamados</small>
+    </div>
     </div>
 
-    <!-- Dashboard Cards -->
-    <div class="d-flex gap-3 flex-wrap justify-content-center mb-5">
-      <div class="card-dashboard">
-        <i class="bi bi-list-ul"></i>
-        <h2 id="total-chamados">0</h2>
-        <small>Total de Chamados</small>
+    <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+      <i class="bi bi-folder2-open py-0"></i>
+      <div class="card-dashboard-inside align-items-center">
+      <h2 id="chamados-abertos">0</h2>
+      <small>Chamados Abertos</small>
       </div>
+    </div>
 
-      <div class="card-dashboard">
-        <i class="bi bi-folder-open"></i>
-        <h2 id="chamados-abertos">0</h2>
-        <small>Chamados Abertos</small>
-      </div>
-
-      <div class="card-dashboard">
-        <i class="bi bi-check2-circle"></i>
+    <div class="card-dashboard d-flex flex-row align-items-center gap-3">
+      <i class="bi bi-check2-circle py-0"></i>
+      <div class="card-dashboard-inside align-items-center">
         <h2 id="chamados-fechados">0</h2>
         <small>Chamados Fechados</small>
       </div>
     </div>
 
-    <!-- Gráfico de Rosca -->
-    <div class="chart-container">
+  </div> -->
+
+  <!-- Coluna do Gráfico -->
+  <!-- <div class="col-12 col-md-7 d-flex justify-content-center align-items-center mt-3 mt-md-0">
+    <div class="chart-container w-100">
       <canvas id="statusChart"></canvas>
     </div>
-
   </div>
+</div> -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>

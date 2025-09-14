@@ -41,12 +41,12 @@ body {
 /* Links da topbar no estilo do botão principal */
 
 .topbar .nav {
-    gap: 6px;
+    gap: 10px;
 }
 
 .topbar .nav-link {
     color: #6d6b70 !important;
-    background: linear-gradient(135deg, #fff, #eef5ff);
+    background: #fff;
     border-radius: 12px;
     padding: 0.45rem 1rem;
     font-weight: 500;
@@ -60,7 +60,7 @@ body {
 
 /* Estado ativo */
 .topbar .nav-link.active {
-    background: linear-gradient(135deg, #000000, #0b0a1f);
+    background: #000000;
     font-weight: 600;
     color: #fff !important;
     box-shadow: 0 6px 18px rgba(85, 110, 230, 0.45) inset;
@@ -321,4 +321,13 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.card-dashboard-inside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-left: 1px solid var(--muted);
+  padding-left: 20px;
 }
