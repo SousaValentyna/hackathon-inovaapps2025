@@ -4,7 +4,7 @@ Ajuda.Ai é uma aplicação web desenvolvida para o Hackathon InovaApps 2025, fo
 
 ## Demonstração
 
-https://www.youtube.com/watch?v=https://youtu.be/VEP0yAQw1os
+[https://www.youtube.com/watch?v=https://youtu.be/VEP0yAQw1os](https://youtu.be/VEP0yAQw1os?si=HxBCcJwnvQOuAyRg)
 
 ## Funcionalidades Principais
 
