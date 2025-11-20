@@ -2,6 +2,10 @@
 
 Ajuda.Ai é uma aplicação web desenvolvida para o Hackathon InovaApps 2025, focada em transformar o atendimento ao cliente e suporte técnico utilizando Inteligência Artificial generativa.
 
+## Demonstração
+
+https://www.youtube.com/watch?v=https://youtu.be/VEP0yAQw1os
+
 ## Funcionalidades Principais
 
 - **Chat de Suporte com IA:**
